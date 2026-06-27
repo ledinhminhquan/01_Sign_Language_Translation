@@ -1,0 +1,1 @@
+"""signlang.automation subpackage."""

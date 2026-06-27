@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "signlang"
+version = "1.0.0"
+description = "Sign Language Translation — translate sign-language video / pose-keypoint sequences into spoken text via a gloss intermediate, with a frozen pose front-end, a trainable seq2seq core, and a deterministic agent (D1-D5) that segments signs, gates recognition confidence, verifies the translation, and abstains on out-of-vocabulary signing"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Le Dinh Minh Quan" }]
+keywords = ["nlp", "sign-language", "translation", "pose", "keypoints", "seq2seq", "gloss", "accessibility", "agent"]
+
+# Core deps only — the package, the synthetic pose generator, the SeedPoseEngine, the numpy centroid
+# recognizer, the lexicon translator, the metrics, the agent and the full test-suite run with ONLY
+# these (no torch / mediapipe). Heavy ML / pose / serving / report libs are extras, imported lazily.
+dependencies = [
+    "numpy>=1.23",
+    "pyyaml>=6.0",
+    "pydantic>=2.0",
+]
+
+[project.optional-dependencies]
+ml = ["torch>=2.1", "transformers>=4.40", "datasets>=2.18", "accelerate>=0.30", "sacrebleu>=2.4"]
+pose = ["mediapipe>=0.10", "opencv-python>=4.8"]
+api = ["fastapi>=0.110", "uvicorn[standard]>=0.29", "gradio>=4.0"]
+report = ["reportlab>=4.0", "python-pptx>=0.6.23", "matplotlib>=3.7"]
+dev = ["pytest>=7.4", "ruff>=0.4"]
+all = [
+    "torch>=2.1", "transformers>=4.40", "datasets>=2.18", "accelerate>=0.30", "sacrebleu>=2.4",
+    "mediapipe>=0.10", "opencv-python>=4.8",
+    "fastapi>=0.110", "uvicorn[standard]>=0.29", "gradio>=4.0",
+    "reportlab>=4.0", "python-pptx>=0.6.23", "matplotlib>=3.7",
+]
+
+[project.scripts]
+signlang = "signlang.cli:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+signlang = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 120
+target-version = "py39"

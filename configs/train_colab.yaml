@@ -1,0 +1,27 @@
+# Colab/H100 training override (the notebook writes a GPU-profiled copy of this).
+# Larger batch + more synthetic sentences for the neural recognizer + t5 translator; the notebook
+# auto-scales batch by GPU tier (H100/A100/L4/T4).
+
+data:
+  use_hf: false          # set true to also probe the permissive real smoke corpus
+  vocab_size: 40
+  n_sentences: 1200
+  seed: 42
+
+pose:
+  engine: "auto"         # MediaPipe when installed (real video), else SeedPoseEngine
+  normalize: true
+
+model:
+  arch: "pose2seq_transformer"
+  d_model: 256
+  enc_layers: 4
+  text_backbone: "t5-small"
+  use_gloss_intermediate: true
+  num_train_epochs: 25
+  per_device_train_batch_size: 128    # H100; the notebook lowers this for A100/L4/T4
+  bf16: true
+  tf32: true
+
+agent:
+  llm_fallback_enabled: false

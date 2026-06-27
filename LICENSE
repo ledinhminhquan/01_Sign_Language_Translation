@@ -1,0 +1,38 @@
+MIT License
+
+Copyright (c) 2026 Le Dinh Minh Quan
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+NOTE ON MODELS & DATASETS (third-party, separate licenses — verified on the HF Hub):
+- Trainable backbones: google-t5/t5-small (Apache-2.0); google/byt5-small (Apache-2.0);
+  facebook/m2m100_418M (MIT). Pose/CSLR references: manohonsy/how2sign-pose-cslr (MIT);
+  sign/sockeye-signwriting-to-text (MIT). Video front-end: microsoft/xclip-base-patch32 (MIT).
+  Pose front-end: MediaPipe Holistic (Apache-2.0, Google).
+- AVOID (non-commercial): MCG-NJU/videomae-base (CC-BY-NC); sign/mediapipe-vq (CC-BY-NC-SA).
+- Datasets: Sigurdur/icelandic-sign-language (Apache-2.0, permissive smoke test);
+  om192006/sign_language_keypoints (MIT). FLAGGED (non-commercial / gated / unspecified):
+  Exploration-Lab/iSign (CC-BY-NC-SA, gated); aipieces/How2Sign + PSewmuthu/How2Sign_Holistic
+  (How2Sign is CC-BY-NC upstream); Voxel51/WLASL (license:other); Kibalama/poseformer-sign-language.
+  RWTH-PHOENIX-2014T / CSL-Daily / YouTube-ASL are NOT redistributable HF repos (academic licenses).
+Every continuous sign-language corpus found is non-commercial / gated / unspecified — verify and
+comply with each upstream license before any use. This MIT license covers ONLY the code in this
+repository, not the third-party models/datasets. The synthetic pose generator is the primary data.

@@ -1,0 +1,11 @@
+{
+  "description": "Example seeds for `signlang translate --seed ...`. Each seed deterministically generates a signed sentence (pose-keypoint trajectories) with the gold glosses/text below.",
+  "examples": [
+    {"seed": 5000, "note": "in-vocabulary signed sentence -> recognized glosses + spoken text"},
+    {"seed": 5001, "note": "another in-vocabulary sentence"},
+    {"seed": 5002, "note": "a longer sentence (more sign segments)"},
+    {"seed": 7777, "note": "in-vocabulary; try `--fast` (offline numpy centroid recognizer)"}
+  ],
+  "abstain_behaviour": "A pose sequence with no clear signs (random/low-motion) or heavy keypoint noise drives the per-sign confidence below threshold; when the low-confidence-segment ratio exceeds 0.5 the agent ABSTAINS ('uncertain' + needs_review) rather than emit an unreliable translation.",
+  "vocabulary_note": "The 40-gloss vocabulary + gloss->text lexicon is in src/signlang/data/lexicon.py; GET /vocabulary returns it from the running API."
+}

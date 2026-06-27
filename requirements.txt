@@ -1,0 +1,7 @@
+# Core runtime — the package, the synthetic pose generator, the SeedPoseEngine, the numpy centroid
+# recognizer, the lexicon translator, the metrics, the agent and the full test-suite run with ONLY
+# these (no torch / mediapipe). Install the heavy extras from pyproject for training / serving / reports:
+#   pip install -e ".[all]"   (or .[ml], .[pose], .[api], .[report])
+numpy>=1.23
+pyyaml>=6.0
+pydantic>=2.0

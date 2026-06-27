@@ -1,0 +1,67 @@
+# Default configuration — Sign Language Translation (signlang).
+# All paths come from env vars (SIGNLANG_ARTIFACTS_DIR / _DATA_DIR / _MODEL_DIR / _RUN_DIR, HF_HOME);
+# this file only overrides knobs. Unknown keys are ignored by load_config.
+
+project_title: "Sign Language Translation System"
+author: "Le Dinh Minh Quan"
+student_id: "23127460"
+
+data:
+  real_smoke_dataset: "Sigurdur/icelandic-sign-language"   # Apache-2.0, permissive smoke test
+  pose_dataset: "PSewmuthu/How2Sign_Holistic"              # MediaPipe landmarks (FLAG: NC upstream)
+  gloss_text_dataset: "Exploration-Lab/iSign"              # SignPose2Text (FLAG: NC, gated)
+  use_hf: false                                            # default to the synthetic pose generator
+  vocab_size: 40
+  n_sentences: 600
+  min_signs: 2
+  max_signs: 6
+  frames_per_sign: 12
+  seed: 42
+
+pose:
+  engine: "auto"        # auto -> SeedPoseEngine offline, MediaPipe when installed
+  n_hand_landmarks: 21
+  n_body_landmarks: 25
+  coords: 3
+  fps: 25
+  max_frames: 160
+  normalize: true       # sequence-level (centered per frame, one shared scale)
+
+model:
+  arch: "pose2seq_transformer"
+  d_model: 256
+  n_heads: 4
+  enc_layers: 4
+  dec_layers: 4
+  ff_dim: 512
+  dropout: 0.1
+  text_backbone: "t5-small"          # Apache-2.0; m2m100_418M (MIT) for multilingual
+  use_gloss_intermediate: true       # Sign2Gloss2Text
+  num_train_epochs: 20
+  learning_rate: 3.0e-4
+  per_device_train_batch_size: 64
+  bf16: true
+  tf32: true
+
+decode:
+  beam_size: 1
+  max_decode_len: 48
+
+agent:
+  min_frames: 6
+  motion_quantile: 0.3
+  min_segment_frames: 4
+  recog_min_conf: 0.15
+  verify_backtranslate: true
+  min_chrf_keep: 0.20
+  abstain_enabled: true
+  oov_abstain_ratio: 0.5
+  llm_fallback_enabled: false        # the LLM brain is OFF by default
+  llm_model: "claude-haiku-4-5-20251001"
+  llm_api_key_env: "SIGNLANG_LLM_API_KEY"
+
+serving:
+  api_title: "Sign Language Translation API"
+  api_version: "1.0.0"
+  log_jobs: true
+  model_version: "latest"
