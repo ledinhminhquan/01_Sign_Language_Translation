@@ -51,7 +51,7 @@ CELLS.append(code(
     "#@title Controls { run: 'auto' }\n"
     "USE_DRIVE = True           #@param {type:'boolean'}\n"
     "CLONE_FROM_GIT = True      #@param {type:'boolean'}\n"
-    "GIT_URL = 'https://github.com/<your-username>/01_Sign_Language_Translation.git'  #@param {type:'string'}\n"
+    "GIT_URL = 'https://github.com/ledinhminhquan/01_Sign_Language_Translation.git'  #@param {type:'string'}\n"
     "TRAIN_CORE = True          #@param {type:'boolean'}\n"
     "TRAIN_TRANSLATOR = True    #@param {type:'boolean'}   # fine-tune t5 gloss->text (else lexicon)\n"
     "N_SENTENCES = 1200         #@param {type:'integer'}\n"
